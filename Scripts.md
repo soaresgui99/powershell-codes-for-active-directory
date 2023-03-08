@@ -16,9 +16,27 @@ Get-Command -Module ActiveDirectory
 Get-ADDomain
 
 ```
-- Obtain all domain controllers by hostname and SO
+- Get all domain controllers by hostname and SO
 ```
 
 Get-ADDomainController -filter * | select hostname, operatingsystem
+
+```
+- Get all password policies
+```
+
+GET-ADFineGrainedPassowrdPolicy -filter *
+
+```
+- List all password policies in the connected domain
+```
+
+Get-ADDefaultDomainPasswordPolicy
+
+```
+-   Get the users and list all properties
+```
+
+-Get-ADUsers username -Properties *
 
 ```
