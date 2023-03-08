@@ -1,5 +1,5 @@
-# Useful Commands to help your Active Directory administration 
-> This repository will help with useful codes to management an Active Directory environment.
+# Useful Commands | Active Directory administration 
+> This repository will help with useful commands/scripts to administrate your Active Directory.
 
 ### Enjoy =D
 
@@ -40,5 +40,48 @@ Get-ADDefaultDomainPasswordPolicy
 ```
 
 -Get-ADUser username -Properties *
+
+```
+- Get all the domain users
+```
+
+Get-ADUser -Filter *
+
+```
+- Get all the domain users from a specif OU
+```
+
+Get-ADUser -SearchBase "OU=Infrastructure Users,dc=mycompany.com.br" -Filter *
+
+```
+- This command will find all users with the word "Robert" in the name.
+```
+
+Get-ADUser -Filter {name -like "*Robert*"}
+
+```
+- Get all disable accounts
+```
+
+Search-ADAccount -AccountDisabled | select name
+
+```
+- Disable a single account 
+```
+
+Disable-ADAccount -Identity robert.smith
+
+```
+- Activate a single account
+```
+
+Enable-ADAccount -Identity robert.smith
+
+```
+
+- Get all accounts with the propertie password never expires
+```
+
+Get-ADUser -Filter * -properties Name, PasswordNeverExpires | where {$_.passwordNeverExpires -eq "true" } | Select-Object DistinguishedName,Name,Enabled
 
 ```
