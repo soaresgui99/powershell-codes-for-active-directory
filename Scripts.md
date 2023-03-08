@@ -37,6 +37,6 @@ Get-ADDefaultDomainPasswordPolicy
 -   Get the users and list all properties
 ```
 
--Get-ADUsers username -Properties *
+-Get-ADUser username -Properties *
 
 ```
