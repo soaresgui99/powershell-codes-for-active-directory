@@ -39,7 +39,7 @@ Get-ADDefaultDomainPasswordPolicy
 -   Get the users and list all properties
 ```
 
--Get-ADUser username -Properties *
+Get-ADUser username -Properties *
 
 ```
 - Get all the domain users
@@ -100,7 +100,6 @@ Unlock-ADAccount -Identity robert.smith
 - Force user to change the password in the next logon
 ```
 
-Set-ADUser - Identity username -ChangePasswordAtLogon $true
 
 ```
 - Move the user OU (you will need the 'distinguishedName' from the user and OU) 
