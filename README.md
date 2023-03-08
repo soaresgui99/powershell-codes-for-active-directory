@@ -51,7 +51,7 @@ Get-ADUser -Filter *
 - Get all the domain users from a specif OU
 ```
 
-Get-ADUser -SearchBase "OU=Infrastructure Users,dc=mycompany.com.br" -Filter *
+Get-ADUser -SearchBase "OU=Infrastructure Users,dc=mycompany,dc=com" -Filter *
 
 ```
 - This command will find all users with the word "Robert" in the name.
@@ -84,4 +84,26 @@ Enable-ADAccount -Identity robert.smith
 
 Get-ADUser -Filter * -properties Name, PasswordNeverExpires | where {$_.passwordNeverExpires -eq "true" } | Select-Object DistinguishedName,Name,Enabled
 
+```
+- Find all user accounts blocked
+```
+
+Search-ADAccount -LockedOut
+
+```
+- Unlock user account
+```
+
+Unlock-ADAccount -Identity robert.smith
+
+```
+- Force user to change the password in the next logon
+```
+
+Set-ADUser - Identity username -ChangePasswordAtLogon $true
+
+```
+- Move the user OU (you will need the 'distinguishedName' from the user and OU) 
+```
+Move-ADObject -Identity "CN=Test User (0001),OU=Infrastructure Users,DC=mycompany,DC=com" -TargetPath "OU=HR,OU=Human Resources Users,DC=mycompany,DC=com"
 ```
