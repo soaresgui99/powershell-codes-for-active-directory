@@ -79,7 +79,7 @@ Enable-ADAccount -Identity robert.smith
 
 ```
 
-- Get all accounts with the propertie password never expires
+- Get all accounts with the properties password never expires
 ```
 
 Get-ADUser -Filter * -properties Name, PasswordNeverExpires | where {$_.passwordNeverExpires -eq "true" } | Select-Object DistinguishedName,Name,Enabled
