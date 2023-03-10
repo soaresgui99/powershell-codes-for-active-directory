@@ -107,3 +107,76 @@ Set-ADUser - Identity username -ChangePasswordAtLogon $true
 ```
 Move-ADObject -Identity "CN=Test User (0001),OU=Infrastructure Users,DC=mycompany,DC=com" -TargetPath "OU=HR,OU=Human Resources Users,DC=mycompany,DC=com"
 ```
+- Get all security group members
+```
+
+Get-ADGroupMember -identity "Infrastructure Admins"
+
+```
+- This will list all security groups from domain controller
+```
+
+Get-ADGroup -filter *
+
+```
+- Create a group with a name and your members
+
+```
+
+Add-ADGroupMember -Identity FileServer -Members robert.smith, rachel.saints
+
+```
+Find a group with a keyword. This is useful with you don't know the exactly name.
+```
+
+Get-ADGroup -filter * | Where-Object {$_.name -like "*infra*"}
+
+```
+- Import a user list to a group
+```
+
+$members = Import-CSV C:\temp\add-to-group.csv | Select-Object -ExpandProperty samaccountname Add-GroupMember -Identity FileServer -Members $members
+
+```
+- Get all computers from domain 
+```
+
+Get-ADComputer -filter *
+
+```
+- Get all computers from an OU
+```
+
+Get-ADComputer -SearchBase "OU=Infrastructure" -Filter *
+
+```
+- Get a number of all computers from domain controller
+```
+
+Get-ADComputer -Filter * | measure
+
+```
+- Search by operating system on domain controller 
+```
+
+Get-ADComputer -filter {OperatingSystem -Like '*Windows 10*'} -property * | select name, operatingsystem
+
+```
+- This will count all the computers by operating system. Is a great command to inventory your envinroment.
+```
+
+Get-ADComputer -Filter "name -like '*'" -Properties operatingSystem | group -Property operatingSystem | Select Name,Count
+
+```
+- Remove a single computer
+```
+
+Remove-ADComputer -Identity "COMPUTER01"
+
+```
+- Add all hostnames and use the text archive above to execute a command
+```
+
+Get-Content -Path C:\temp\ComputerList.txt | Remove-ADComputer
+
+```
