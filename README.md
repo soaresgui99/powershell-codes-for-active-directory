@@ -180,3 +180,28 @@ Remove-ADComputer -Identity "COMPUTER01"
 Get-Content -Path C:\temp\ComputerList.txt | Remove-ADComputer
 
 ```
+- Remove computers from a specific OU
+```
+
+Get-ADComputer -SearchBase "OU=DN" -Filter * | Remove-ADComputer
+
+```
+- Get all commands about GPO
+```
+
+Get-Command -Module grouppolicy
+
+```
+- Get all GPO with status
+```
+
+Get-GPO -all | Select DisplayName, gpostatus
+
+```
+
+- Make a backup of every GPO 
+```
+
+Backup-GPO -All -Path E:\GPOBackup
+
+```
